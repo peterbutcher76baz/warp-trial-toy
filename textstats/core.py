@@ -11,6 +11,8 @@ def word_count(text: str) -> int:
 
 def mean_word_length(text: str) -> float:
     words = _words(text)
+    if not words:
+        return 0.0
     return sum(len(w) for w in words) / len(words)
 
 
