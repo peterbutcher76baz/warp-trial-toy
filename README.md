@@ -12,9 +12,10 @@ mean_word_length("The cat sat")             # 3.0
 top_words("the cat and the hat", 1)         # [("the", 2)]
 ```
 
-All functions split words on whitespace, strip ASCII punctuation from each word's
-edges, and ignore tokens that become empty. Punctuation inside a word stays
-unchanged, including apostrophes and hyphens.
+All functions split words on whitespace and strip Unicode punctuation from each
+word's edges. ASCII characters in `string.punctuation`, including symbols such as
+`$` and `+`, are also stripped. Tokens that become empty are ignored. Punctuation
+inside a word stays unchanged, including apostrophes and hyphens.
 
 ## Test
 

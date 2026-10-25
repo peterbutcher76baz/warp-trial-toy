@@ -52,3 +52,36 @@ def test_statistics_preserve_internal_punctuation():
     assert word_count(text) == 3
     assert mean_word_length(text) == 6.0
     assert top_words(text, 2) == [("don't", 2), ("re-enter", 1)]
+
+
+def test_statistics_strip_typographic_quotes():
+    text = "“cat” cat"
+    assert top_words(text, 2) == [("cat", 2)]
+    assert mean_word_length(text) == 3.0
+
+
+def test_statistics_strip_unicode_ellipsis():
+    text = "cat… cat"
+    assert top_words(text, 2) == [("cat", 2)]
+    assert mean_word_length(text) == 3.0
+
+
+def test_statistics_ignore_em_dash_token():
+    text = "cat — cat"
+    assert word_count(text) == 2
+    assert mean_word_length(text) == 3.0
+    assert top_words(text, 2) == [("cat", 2)]
+
+
+def test_statistics_ignore_unicode_punctuation_only_input():
+    text = "“”… —"
+    assert word_count(text) == 0
+    assert mean_word_length(text) == 0.0
+    assert top_words(text, 2) == []
+
+
+def test_statistics_strip_mixed_unicode_and_ascii_edges():
+    text = "$“CaT”+ +cat$"
+    assert word_count(text) == 2
+    assert mean_word_length(text) == 3.0
+    assert top_words(text, 2) == [("cat", 2)]

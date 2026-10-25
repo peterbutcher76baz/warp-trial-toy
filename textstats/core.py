@@ -1,10 +1,23 @@
 from collections import Counter
 from string import punctuation
+from unicodedata import category
+
+
+def _is_punctuation(character: str) -> bool:
+    return character in punctuation or category(character).startswith("P")
 
 
 def _words(text: str) -> list[str]:
-    words = (word.strip(punctuation) for word in text.split())
-    return [word for word in words if word]
+    words = []
+    for word in text.split():
+        start, end = 0, len(word)
+        while start < end and _is_punctuation(word[start]):
+            start += 1
+        while end > start and _is_punctuation(word[end - 1]):
+            end -= 1
+        if start < end:
+            words.append(word[start:end])
+    return words
 
 
 def word_count(text: str) -> int:
