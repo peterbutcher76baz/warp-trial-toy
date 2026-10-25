@@ -1,3 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "textstats"
+version = "0.1.0"
+description = "Simple text statistics for Python and the terminal"
+readme = "README.md"
+requires-python = ">=3.12"
+
+[project.scripts]
+textstats = "textstats.cli:main"
+
+[tool.setuptools]
+packages = ["textstats"]
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
