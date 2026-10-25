@@ -13,6 +13,14 @@ def test_mean_word_length():
     assert mean_word_length("The cat sat") == 3.0
 
 
+def test_mean_word_length_empty():
+    assert mean_word_length("") == 0.0
+
+
+def test_mean_word_length_whitespace():
+    assert mean_word_length(" \t\n ") == 0.0
+
+
 def test_top_words():
     assert top_words("the cat and the hat", 1) == [("the", 2)]
 
