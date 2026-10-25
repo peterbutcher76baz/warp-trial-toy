@@ -1,8 +1,10 @@
 from collections import Counter
+from string import punctuation
 
 
 def _words(text: str) -> list[str]:
-    return text.split()
+    words = (word.strip(punctuation) for word in text.split())
+    return [word for word in words if word]
 
 
 def word_count(text: str) -> int:
